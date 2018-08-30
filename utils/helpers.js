@@ -139,8 +139,6 @@ export function getMetricMetaInfo(metric) {
     if (typeof(metric) === 'undefined'){
         return info;
     }else{
-        console.log( info[metric])
-        console.log( info[metric].getIcon())
         return info[metric];
     }
 }

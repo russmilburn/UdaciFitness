@@ -11,6 +11,7 @@ import {submitEntry, removeEntry} from "../utils/api";
 import {connect} from 'react-redux'
 import {addEntry} from "../actions";
 import {purple, white} from "../utils/colors";
+import {NagvigationAction}  from 'react-navigation'
 
 
 function SubmitButton({onPress}) {
@@ -64,8 +65,6 @@ class AddEntry extends React.Component {
     const key = timeToString();
     const entry = this.state;
 
-    console.log(JSON.stringify(entry));
-
     this.props.dispatch(addEntry({
         [key]: entry
       }));
@@ -77,9 +76,9 @@ class AddEntry extends React.Component {
       swim: 0,
       sleep: 0,
       eat: 0,
-    }))
+    }));
 
-    //TODO navigate home
+    this.toHome();
 
     submitEntry({key, entry})
 
@@ -91,14 +90,19 @@ class AddEntry extends React.Component {
 
     this.props.dispatch(addEntry({
       [key]: getDailyReminderValue()
-    }))
+    }));
 
-    //TODO: route to home
+    this.toHome();
 
-    removeEntry(key
-    )
+    removeEntry(key)
 
   };
+
+  toHome = () =>{
+    this.props.navigation.dispatch(NagvigationAction.back({
+      key:'AddEntry'
+    }))
+  }
 
   render() {
     const metaInfo = getMetricMetaInfo();
